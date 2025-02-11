@@ -1,2 +1,2 @@
-# djngmt
+# djng
 Django Angular Material integration
