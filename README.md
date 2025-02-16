@@ -1,2 +1,10 @@
 # djng
-Django Angular Material integration
+
+Django Angular integration
+
+# packaging
+
+## Windows
+```pwsh
+python.exe -m buil
+```

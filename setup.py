@@ -82,8 +82,8 @@ setup(
     author_email='shlomoa@lightmoneysw.com',  # SEE NOTE BELOW (*)
     packages=find_packages(exclude=['tests*']),
     include_package_data=True,
-    install_requires=["django>=4.2", 'backports.zoneinfo;python_version<"3.9"'],
-    python_requires=">=3.8",
+    install_requires=["django>=4.2", 'djangorestframework', 'django-filter', 'backports.zoneinfo;python_version<"3.9"'],
+    python_requires=">=3.11",
     zip_safe=False,
     classifiers=[
         'Development Status :: 5 - Production/Stable',
