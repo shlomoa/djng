@@ -6,5 +6,5 @@ Django Angular integration
 
 ## Windows
 ```pwsh
-python.exe -m buil
+python.exe -m build
 ```
