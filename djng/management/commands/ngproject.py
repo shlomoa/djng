@@ -8,6 +8,7 @@ class Command(BaseCommand):
     """ overloading the original startproject Command"""
     ng_command = "new_project"
     def handle(self, **options):
+        self.validate(**options)
         try:
             call_back = getattr(ng_commands, self.ng_command)
             call_back(**options)
