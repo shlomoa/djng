@@ -15,16 +15,19 @@ def ng_build(**options):
     """
     runner = NgRunner(settings)
     args: list[str] = ["build"]
-    if "output_path" not in options:
-        output_path = os.path.join(os.getcwd(), options["name"])
+    if ("output_path" not in options) or (options["output_path"] is None):
+        output_path = os.path.join(os.getcwd(), 'ng_dist')
     else:
         output_path = options["output_path"]
-    args += ["--output_path", output_path]
-    if "output-hashing" in options:
+    args += ["--output-path", output_path]
+    if ("output-hashing" in options) and (options["output_hashing"] is not None):
         args += ["--output-hashing", options["output_hashing"]]
     else:
         args += ["--output-hashing", "none"]
-    if "continuous" in options:
-        args += ["--watch"]
-    kwargs = {'cwd': os.path.join(os.getcwd(), 'ng')}
+    if ("continuous" in options) and (options["continuous"] is not None):
+        args += ["--watch", "false"]
+    kwargs = {
+        'cwd': os.path.join(os.getcwd(), 'ng'),
+        'shell': True
+        }
     runner.runshell(*args, **kwargs)

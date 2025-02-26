@@ -16,6 +16,13 @@ class NgRunner:
         """ng cli command runner"""        
         args = [self.ng_cmd_path] + list(args)
         cwd = None
-        if 'cwd' in kwargs:
+        if ('cwd' in kwargs) and (kwargs['cwd'] is not None):
             cwd = kwargs['cwd']
-        return subprocess.run(args, check=True, cwd=cwd)
+        shell = False
+        if ('shell' in kwargs) and (kwargs['shell'] is not None):
+            shell = kwargs['shell']
+        env = None
+        if 'env' in kwargs:
+            env = kwargs['env']
+        print(args)
+        return subprocess.run(args, check=True, cwd=cwd, shell=shell, env=env)

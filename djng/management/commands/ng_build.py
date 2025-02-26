@@ -28,16 +28,26 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        if "name" not in options:
-            raise CommandError("application must have a name")
-        if "output_path" not in options:
-            output_path = os.path.join(os.getcwd(), 'ng', options["name"])
-        else:
-            output_path = options["output_path"]
-        if not os.path.exists(output_path):
-            raise CommandError("Command ng build failed, output path does not exist")
+        self.validate(**options)
         try:
             call_back = getattr(ng_commands, "ng_build")
             call_back(**options)
         except AttributeError as exc:
             raise CommandError("Command ng build failed") from exc
+
+    def validate(self, **options):
+        """ Validate correct options """
+        if ("name" not in options) or (options["name"] is None):
+            raise CommandError("application must have a name")
+        if ("output_path" not in options) or (options["output_path"] is None):
+            output_path = os.path.join(os.getcwd(), 'ng_dist')
+        else:
+            output_path = options["output_path"]
+        curr_path = os.path.join(os.getcwd(), 'ng')
+        if not os.path.exists(curr_path):
+            raise CommandError("Command ng build failed - should run from project base_directory")
+        if not os.path.exists(output_path):
+            try:
+                os.mkdir(output_path)
+            except Exception as exc:
+                raise CommandError("Command ng build failed to to create:" + output_path) from exc
