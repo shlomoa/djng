@@ -14,7 +14,8 @@ class NgRunner:
 
     def runshell(self, *args, **kwargs):
         """ng cli command runner"""        
-        args = [self.ng_cmd_path] + list(args)
+        myargs = [self.ng_cmd_path]
+        myargs += args
         cwd = None
         if ('cwd' in kwargs) and (kwargs['cwd'] is not None):
             cwd = kwargs['cwd']
@@ -24,5 +25,5 @@ class NgRunner:
         env = None
         if 'env' in kwargs:
             env = kwargs['env']
-        print(args)
-        return subprocess.run(args, check=True, cwd=cwd, shell=shell, env=env)
+        print(myargs)
+        return subprocess.run(myargs, check=True, cwd=cwd, shell=shell, env=env)

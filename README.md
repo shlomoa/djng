@@ -6,5 +6,8 @@ Django Angular integration
 
 ## Windows
 ```pwsh
-python.exe -m build
+python.exe -m venv venv
+.\venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+python.exe setup.py sdist
 ```

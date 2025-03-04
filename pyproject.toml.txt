@@ -1,0 +1,25 @@
+[project]
+name = "djng"
+version = "0.0.1"
+authors = [
+  { name="Example Author", email="author@example.com" },
+]
+description = "A small example package"
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+dependencies = [
+    "django",
+    'djangorestframework',
+    'django-filter',
+    'importlib-metadata; python_version<"3.9"',
+]
+
+[project.urls]
+Homepage = "https://github.com/lightmoneysw/djng"
+Issues = "https://github.com/lightmoneysw/djng/issues"

@@ -24,4 +24,4 @@ def new_project(**options):
     args += ['--directory', install_path]
     args += ['--new-project-root', project_name]
     args += ['--defaults', 'true', '--prefix', project_name]
-    runner.runshell(args)
+    runner.runshell(*args)
