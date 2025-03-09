@@ -7,7 +7,7 @@ from io import open
 from setuptools import find_packages, setup
 
 CURRENT_PYTHON = sys.version_info[:2]
-REQUIRED_PYTHON = (3, 8)
+REQUIRED_PYTHON = (3, 11)
 
 # This check and everything above must remain compatible with Python 2.7.
 if CURRENT_PYTHON < REQUIRED_PYTHON:
@@ -82,7 +82,7 @@ setup(
     author_email='shlomoa@lightmoneysw.com',  # SEE NOTE BELOW (*)
     packages=find_packages(exclude=['tests*']),
     include_package_data=True,
-    install_requires=["django>=4.2", 'djangorestframework', 'django-filter', 'backports.zoneinfo;python_version<"3.9"'],
+    install_requires=["django>=5.1", 'djangorestframework>=3.15', 'django-filter', "drf_spectacular>=0.28", 'backports.zoneinfo;python_version<"3.9"'],
     python_requires=">=3.11",
     zip_safe=False,
     classifiers=[

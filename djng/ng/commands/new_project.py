@@ -22,6 +22,7 @@ def new_project(**options):
     args: list = ["new", project_name, '--create-application', 'false']
     args += ['--style', 'scss', '--skip-git', 'true', '--routing', 'true']
     args += ['--directory', install_path]
-    args += ['--new-project-root', project_name]
-    args += ['--defaults', 'true', '--prefix', project_name]
+    args += ['--new-project-root', project_name]    
+    args += ['--prefix', project_name]
+    args += ['--defaults', 'true']
     runner.runshell(*args)
