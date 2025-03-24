@@ -15,14 +15,15 @@ def new_project(**options):
     """
     runner = NgRunner(settings)
     project_name = options["name"]
-    target_dir = options["directory"]
-    if target_dir is None:
-        target_dir = "."
-    install_path = os.path.join(target_dir, project_name, 'ng')
+    cur_dir = '.'
+    install_path = os.path.join(cur_dir, 'ng')
+    if not os.path.exists(install_path):
+        os.mkdir(install_path)
     args: list = ["new", project_name, '--create-application', 'false']
     args += ['--style', 'scss', '--skip-git', 'true', '--routing', 'true']
-    args += ['--directory', install_path]
-    args += ['--new-project-root', project_name]    
+    args += ['--directory', cur_dir]
+    args += ['--new-project-root', project_name]
     args += ['--prefix', project_name]
     args += ['--defaults', 'true']
-    runner.runshell(*args)
+    kwargs = {'cwd': install_path}
+    runner.runshell(*args, **kwargs)

@@ -15,8 +15,9 @@ def ng_build(**options):
     """
     runner = NgRunner(settings)
     args: list[str] = ["build"]
+    app_name = options["name"]
     if ("output_path" not in options) or (options["output_path"] is None):
-        output_path = os.path.join(os.getcwd(), 'ng_dist')
+        output_path = os.path.join(os.getcwd(), 'ng_dist', app_name)
     else:
         output_path = options["output_path"]
     args += ["--output-path", output_path]
@@ -24,8 +25,8 @@ def ng_build(**options):
         args += ["--output-hashing", options["output_hashing"]]
     else:
         args += ["--output-hashing", "none"]
-    if ("continuous" in options) and (options["continuous"] is not None):
-        args += ["--watch", "false"]
+    if ("continuous" in options) and options["continuous"]:
+        args += ["--watch", "true"]
     kwargs = {
         'cwd': os.path.join(os.getcwd(), 'ng'),
         'shell': True

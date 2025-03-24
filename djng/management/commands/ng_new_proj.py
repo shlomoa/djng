@@ -19,10 +19,9 @@ class Command(BaseCommand):
         """Validate the command parameters"""
         if "name" not in options:
             raise CommandError("name must be specified.")
-        project_name = options["name"]
         target_dir = '.'
         if hasattr(options, "directory") and options["directory"] is not None:
             target_dir = options["directory"]
-        install_path = os.path.join(target_dir, project_name, 'ng')
+        install_path = os.path.join(target_dir, 'ng')
         if os.path.exists(install_path):
             raise CommandError(f"{install_path} already exists.")
