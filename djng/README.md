@@ -15,12 +15,6 @@ This package is providing a fully programable solution, with
 
 # Building blocks
 
-## Framework
-
-A framework is a web site structure
-
-### OnePage
-
 ## Components
 
 [Components][Components] are ready to use web parts interfacing [drf][drf] interleaved with Django templates and implemented in TS to complete the harmony.

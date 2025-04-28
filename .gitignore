@@ -11,12 +11,11 @@
 /build/
 /dist/
 /*.egg-info/
-/env/
+/*env*/
 MANIFEST
 coverage.*
 
 !.github
 !.gitignore
 !.pre-commit-config.yaml
-
-/*venv*/
+__pycache__
