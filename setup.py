@@ -44,12 +44,13 @@ def get_version(package):
     """
     Return package version as listed in `__version__` in `init.py`.
     """
-    init_py = open(os.path.join(package, '__init__.py')).read()
-    return re.search("__version__ = ['\"]([^'\"]+)['\"]", init_py).group(1)
-
+    init_py = open(os.path.join(package, '__init__.py'), encoding='utf-8').read()
+    search_results = re.search("__version__ = ['\"]([^'\"]+)['\"]", init_py)
+    if search_results is None:
+        return '1.0.0'
+    return search_results.group(1)
 
 version = get_version('djng')
-
 
 if sys.argv[-1] == 'publish':
     if os.system("pip freeze | grep twine"):
@@ -82,7 +83,11 @@ setup(
     author_email='shlomoa@lightmoneysw.com',  # SEE NOTE BELOW (*)
     packages=find_packages(exclude=['tests*']),
     include_package_data=True,
-    install_requires=["django>=5.1", 'djangorestframework>=3.15', 'django-filter', "drf_spectacular>=0.28", 'backports.zoneinfo;python_version<"3.9"'],
+    install_requires=["django>=5.1", 'djangorestframework>=3.15', 
+                      'django-filter>=25.1', 
+                      'django-cors-headers>=4.7'
+                      "drf_spectacular>=0.28", 
+                      'backports.zoneinfo;python_version<"3.9"'],
     python_requires=">=3.11",
     zip_safe=False,
     classifiers=[
@@ -92,6 +97,7 @@ setup(
         'Framework :: Django :: 4.2',
         'Framework :: Django :: 5.0',
         'Framework :: Django :: 5.1',
+        'Framework :: Django :: 5.2',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
