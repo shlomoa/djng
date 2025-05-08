@@ -83,9 +83,10 @@ setup(
     author_email='shlomoa@lightmoneysw.com',  # SEE NOTE BELOW (*)
     packages=find_packages(exclude=['tests*']),
     include_package_data=True,
-    install_requires=["django>=5.1", 'djangorestframework>=3.15', 
-                      'django-filter>=25.1', 
-                      'django-cors-headers>=4.7'
+    install_requires=["django>=5.1",
+                      "djangorestframework>=3.15",
+                      "django-filter>=25.1", 
+                      "django-cors-headers>=4.7",
                       "drf_spectacular>=0.28", 
                       'backports.zoneinfo;python_version<"3.9"'],
     python_requires=">=3.11",
@@ -118,4 +119,3 @@ setup(
         'Changelog': 'https://www.github.com/shlomoa/djng/CHANGELOG.md',
     },
 )
-
