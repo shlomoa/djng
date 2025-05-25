@@ -11,6 +11,13 @@ This package is providing a fully programable solution, with
 [Django][Django]  [drf][drf]  [Angular][Angular]
 -
 
+# commands
+
+| Name               | Matching ng | 
+| :----------------- | ----------: | 
+| ng_new_proj        | new         | 
+| ng_gen_application | gen app     |
+
 # Quick demo
 
 # Building blocks
@@ -32,3 +39,5 @@ This package is providing a fully programable solution, with
 [Angular Material]: docs/angular_material.md
 [Components]: docs/components.md
 
+
+# djng development

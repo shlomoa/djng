@@ -16,16 +16,20 @@ def gen_application(**options):
     """
     runner = NgRunner(settings)
     app_name = options["name"]
-    cur_dir = '.'
-    install_path = os.path.join(cur_dir, 'ng')
+    cur_dir = os.path.join('.', 'ng')
+    install_path = os.path.abspath(cur_dir)
     if not os.path.exists(install_path):
         raise FileExistsError(install_path)
-    kwargs = {'cwd': install_path}
-    ng_cfg_args = ["config", "newProjectRoot"]
-    proj_name = runner.getfromshell(*ng_cfg_args, **kwargs)
-    proj_name = proj_name.decode('ascii').strip()
+    project_dirs = os.listdir(cur_dir)
+    if len(project_dirs) != 1:
+        raise FileExistsError("Path ng should contain one project and no more than one")
+    #ng_cfg_args = ["config", "newProjectRoot"]
+    #proj_name = runner.getfromshell(*ng_cfg_args, **kwargs).decode('ascii').strip()
+    proj_name = project_dirs[0]
+    project_path = os.path.join(install_path, proj_name)
+    kwargs = {'cwd': project_path}
     args: list = ["generate", "application", app_name]
-    args += ['--style', 'scss', '--routing', 'true']
-    args += ['--prefix', proj_name, '--defaults', 'true']
-    args += ['--project-root', os.path.join(cur_dir, app_name)]
+    args += ['--prefix=' + app_name]
+    args += ['--project-root=' + proj_name]
+    args += ['--defaults=true', '--style=scss', '--skip-install=true']
     runner.runshell(*args, **kwargs)

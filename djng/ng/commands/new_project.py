@@ -10,20 +10,19 @@ from .runner import NgRunner
 def new_project(**options):
     """
     Example command:
-    ng new myproject --create-application false --style scss --skip-git true --routing true\
+    ng new myproject --create-application false --style scss --skip-git true --routing true \
           --directory ng --new-project-root myproject --defaults true --prefix myproject
     """
     runner = NgRunner(settings)
     project_name = options["name"]
-    cur_dir = '.'
-    install_path = os.path.join(cur_dir, 'ng')
+    ng_dir = os.path.join('.', 'ng')
+    install_path = os.path.abspath(ng_dir)
     if not os.path.exists(install_path):
         os.mkdir(install_path)
-    args: list = ["new", project_name, '--create-application', 'false']
-    args += ['--style', 'scss', '--skip-git', 'true', '--routing', 'true']
-    args += ['--directory', cur_dir]
-    args += ['--new-project-root', project_name]
-    args += ['--prefix', project_name]
-    args += ['--defaults', 'true']
+    args: list = ["new", project_name, '--create-application=false']
+    args += ['--new-project-root=' + project_name]
+    args += ['--prefix=' + project_name]
+    args += ['--style=scss', '--skip-git=true', '--skip-install=true']
+    args += ['--defaults=true']
     kwargs = {'cwd': install_path}
     runner.runshell(*args, **kwargs)
