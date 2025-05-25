@@ -22,9 +22,8 @@ def new_project(**options):
         os.mkdir(install_path)
     args: list = ["new", project_name, '--create-application=false']
     args += ['--directory=' + ng_dir]
-    args += ['--new-project-root=' + project_name]
     args += ['--prefix=' + project_name]
     args += ['--style=scss', '--skip-git=true', '--skip-install=true']
-    args += ['--defaults=true']
+    args += ['--new-project-root=.', '--defaults=true']
     kwargs = {'cwd': cur_dir}
     runner.runshell(*args, **kwargs)

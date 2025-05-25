@@ -19,13 +19,9 @@ def gen_application(**options):
     cur_dir = os.path.join('.', 'ng')
     install_path = os.path.abspath(cur_dir)
     if not os.path.exists(install_path):
-        raise FileExistsError(install_path)    
-    ng_cfg_args = ["config", "newProjectRoot"]
-    kwargs = {'cwd': install_path}
-    proj_name = runner.getfromshell(*ng_cfg_args, **kwargs).decode('ascii').strip()
+        raise FileExistsError(install_path)
     kwargs = {'cwd': install_path}
     args: list = ["generate", "application", app_name]
-    args += ['--prefix=' + app_name]
-    args += ['--project-root=' + proj_name]
+    args += ['--prefix=' + app_name] # determines selector name
     args += ['--defaults=true', '--style=scss', '--skip-install=true']
     runner.runshell(*args, **kwargs)
