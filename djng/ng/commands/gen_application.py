@@ -19,15 +19,11 @@ def gen_application(**options):
     cur_dir = os.path.join('.', 'ng')
     install_path = os.path.abspath(cur_dir)
     if not os.path.exists(install_path):
-        raise FileExistsError(install_path)
-    project_dirs = os.listdir(cur_dir)
-    if len(project_dirs) != 1:
-        raise FileExistsError("Path ng should contain one project and no more than one")
-    #ng_cfg_args = ["config", "newProjectRoot"]
-    #proj_name = runner.getfromshell(*ng_cfg_args, **kwargs).decode('ascii').strip()
-    proj_name = project_dirs[0]
-    project_path = os.path.join(install_path, proj_name)
-    kwargs = {'cwd': project_path}
+        raise FileExistsError(install_path)    
+    ng_cfg_args = ["config", "newProjectRoot"]
+    kwargs = {'cwd': install_path}
+    proj_name = runner.getfromshell(*ng_cfg_args, **kwargs).decode('ascii').strip()
+    kwargs = {'cwd': install_path}
     args: list = ["generate", "application", app_name]
     args += ['--prefix=' + app_name]
     args += ['--project-root=' + proj_name]
