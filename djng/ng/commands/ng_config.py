@@ -14,8 +14,9 @@ def ng_config(**options):
     ng config projects.questionaire.architect.build.options.outputPath
     """
     args: list[str] = ["config"]
-    config_key = options["attribute"]
-    args += [config_key]
+    config_key_value = options["attribute"]
+    key,value = config_key_value.split('=')
+    args += [key, value]
     ng_dir = os.path.abspath(os.path.join('.', 'ng'))
     kwargs = {
         'cwd': ng_dir,
