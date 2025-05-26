@@ -22,7 +22,7 @@ def ng_openapi_gen(**options):
     install_path: str = os.path.abspath(ng_dir)
     kwargs: dict[str, str] = {'cwd': install_path}
     npm_runner = NpmRunner(settings)
-    npm_args = ["install"]
+    npm_args: list[str] = ["install"]
     npm_runner.runshell(*npm_args, **kwargs)
     npm_args += ['ng-openapi-gen']
     npm_runner.runshell(*npm_args, **kwargs)
