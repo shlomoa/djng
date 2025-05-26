@@ -33,7 +33,8 @@ def ng_build(**options):
         'shell': True
         }
     npm_runner = NpmRunner(settings)
-    npm_args = ['install']
-    npm_runner.runshell(*npm_args, **kwargs)
+    npm_args = ["install"]
+    npm_kwargs: dict[str, str] = {'cwd': install_path}
+    npm_runner.runshell(*npm_args, **npm_kwargs)
     ng_runner = NgRunner(settings)
     ng_runner.runshell(*args, **kwargs)
