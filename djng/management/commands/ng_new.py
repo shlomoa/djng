@@ -6,7 +6,7 @@ import djng.ng.commands as ng_commands
 
 class Command(BaseCommand):
     """ overloading the original startproject Command"""
-    ng_command = "new_project"
+    ng_command = "ng_new"
     def handle(self, **options):
         self.validate(**options)
         try:

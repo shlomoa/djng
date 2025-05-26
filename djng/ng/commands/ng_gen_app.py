@@ -7,7 +7,7 @@ import os
 from django.conf import settings
 from .runner import NgRunner
 
-def gen_application(**options):
+def ng_gen_app(**options):
     """
     Example command:
     ng generate application tutorial --prefix myproject \

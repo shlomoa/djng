@@ -7,7 +7,7 @@ import os
 from django.conf import settings
 from .runner import NgRunner
 
-def new_project(**options):
+def ng_new(**options):
     """
     Example command:
     ng new myproject --create-application false --style scss --skip-git true --routing true \

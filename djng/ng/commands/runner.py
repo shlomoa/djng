@@ -2,19 +2,17 @@
 import subprocess
 import shutil
 
-class NgRunner:
-    """A wrapper class for running ng cli"""
-
-    def __init__(self, settings_dict):
+class BaseRunner:
+    def __init__(self, basecmd, settings_dict):
         self.run_settings = settings_dict
-        ng_path = shutil.which('ng')
-        if ng_path is None:
-            raise ChildProcessError("could not find ng executable")
-        self.ng_cmd_path: str = ng_path
+        base_cmd_path = shutil.which(basecmd)
+        if base_cmd_path is None:
+            raise ChildProcessError("could not find ' + basecmd + ' executable")
+        self.base_cmd_path: str = base_cmd_path
 
     def runshell(self, *args, **kwargs):
         """ng cli command runner"""        
-        myargs = [self.ng_cmd_path]
+        myargs = [self.base_cmd_path]
         myargs += args
         cwd = None
         if ('cwd' in kwargs) and (kwargs['cwd'] is not None):
@@ -30,7 +28,7 @@ class NgRunner:
 
     def getfromshell(self, *args, **kwargs):
         """ng cli command runner, read output"""        
-        myargs = [self.ng_cmd_path]
+        myargs = [self.base_cmd_path]
         myargs += args
         cwd = None
         if ('cwd' in kwargs) and (kwargs['cwd'] is not None):
@@ -43,3 +41,14 @@ class NgRunner:
             env = kwargs['env']
         print(myargs)
         return subprocess.check_output(myargs, cwd=cwd, shell=shell, env=env)
+
+class NpmRunner(BaseRunner):
+    """A wrapper class for running npm cli"""
+    def __init__(self, settings_dict):
+        super().__init__('npm', settings_dict)
+
+class NgRunner(BaseRunner):
+    """A wrapper class for running ng cli"""
+    def __init__(self, settings_dict):
+        super().__init__('ng', settings_dict)
+    

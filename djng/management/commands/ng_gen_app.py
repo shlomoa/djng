@@ -6,14 +6,14 @@ import djng.ng.commands as ng_commands
 
 class Command(BaseCommand):
     """ overloading the original startproject Command"""
-    ng_command = "gen_application"
+    ng_command = "ng_gen_app"
     def handle(self, **options):
         self.validate(**options)
         try:
             call_back = getattr(ng_commands, self.ng_command)
             call_back(**options)
         except AttributeError as exc:
-            raise CommandError("Command ng generate application failed.") from exc
+            raise CommandError("Command ng gen app failed.") from exc
 
     def validate(self, **options):
         """Validate the command parameters"""

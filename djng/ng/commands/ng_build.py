@@ -5,7 +5,7 @@
 
 import os
 from django.conf import settings
-from .runner import NgRunner
+from .runner import NgRunner, NpmRunner
 
 
 def ng_build(**options):
@@ -13,7 +13,6 @@ def ng_build(**options):
     Example command:
     ng build --output-path ../beci/app/static/angular --output-hashing none --watch
     """
-    runner = NgRunner(settings)
     args: list[str] = ["build"]
     app_name = options["name"]
     if ("output_path" not in options) or (options["output_path"] is None):
@@ -27,8 +26,14 @@ def ng_build(**options):
         args += ["--output-hashing", "none"]
     if ("continuous" in options) and options["continuous"]:
         args += ["--watch", "true"]
+    ng_dir = os.path.join('.', 'ng')
+    install_path = os.path.abspath(ng_dir)
     kwargs = {
-        'cwd': os.path.join(os.getcwd(), 'ng'),
+        'cwd': os.path.join(install_path),
         'shell': True
         }
-    runner.runshell(*args, **kwargs)
+    npm_runner = NpmRunner(settings)
+    npm_args = ['install']
+    npm_runner.runshell(*npm_args, **kwargs)
+    ng_runner = NgRunner(settings)
+    ng_runner.runshell(*args, **kwargs)
