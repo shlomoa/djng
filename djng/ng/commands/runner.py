@@ -52,3 +52,7 @@ class NgRunner(BaseRunner):
     def __init__(self, settings_dict):
         super().__init__('ng', settings_dict)
     
+class NpxRunner(BaseRunner):
+    """A wrapper class for running ng cli"""
+    def __init__(self, settings_dict):
+        super().__init__('npx', settings_dict)
