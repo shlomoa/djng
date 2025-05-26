@@ -15,26 +15,20 @@ def ng_build(**options):
     """
     args: list[str] = ["build"]
     app_name = options["name"]
-    if ("output_path" not in options) or (options["output_path"] is None):
-        output_path = os.path.join(os.getcwd(), 'ng_dist', app_name)
+    args += [app_name]
+    if "output_path" in options and options['output_path'] is not None:
+        args += ["--output-path=" + options["output_path"]]
+    if "output-hashing" in options and options["output_hashing"] is not None:
+        args += ["--output-hashing=" + options["output_hashing"]]
     else:
-        output_path = options["output_path"]
-    args += ["--output-path", output_path]
-    if ("output-hashing" in options) and (options["output_hashing"] is not None):
-        args += ["--output-hashing", options["output_hashing"]]
-    else:
-        args += ["--output-hashing", "none"]
+        args += ["--output-hashing=none"]
     if ("continuous" in options) and options["continuous"]:
-        args += ["--watch", "true"]
+        args += ["--watch=true"]
     ng_dir = os.path.join('.', 'ng')
-    install_path = os.path.abspath(ng_dir)
-    kwargs = {
-        'cwd': os.path.join(install_path),
-        'shell': True
-        }
+    install_path: str = os.path.abspath(ng_dir)
+    kwargs: dict[str, str] = {'cwd': install_path}
     npm_runner = NpmRunner(settings)
     npm_args = ["install"]
-    npm_kwargs: dict[str, str] = {'cwd': install_path}
-    npm_runner.runshell(*npm_args, **npm_kwargs)
+    npm_runner.runshell(*npm_args, **kwargs)
     ng_runner = NgRunner(settings)
     ng_runner.runshell(*args, **kwargs)

@@ -24,6 +24,7 @@ class Command(BaseCommand):
             "--output-hashing",
             action="store",
             dest="output_hashing",
+            default="none",
             help="Do output hashing"
         )
 
