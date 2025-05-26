@@ -18,13 +18,9 @@ def ng_config(**options):
     key,value = config_key_value.split('=')
     args += [key, value]
     ng_dir = os.path.abspath(os.path.join('.', 'ng'))
-    kwargs = {
-        'cwd': ng_dir,
-        'shell': True
-        }
     npm_runner = NpmRunner(settings)
-    npm_kwargs: dict[str, str] = {'cwd': ng_dir}
+    kwargs: dict[str, str] = {'cwd': ng_dir}
     npm_args: list[str] = ["install"]
-    npm_runner.runshell(*npm_args, **npm_kwargs)
+    npm_runner.runshell(*npm_args, **kwargs)
     ng_runner = NgRunner(settings)
     ng_runner.runshell(*args, **kwargs)
